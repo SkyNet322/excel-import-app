@@ -34,7 +34,7 @@ class ExcelController extends Controller
                 $errorsList = implode(', ', $errors);
                 $errorsText .= "{$rowNumber} - {$errorsList}\n";
             }
-            file_put_contents(public_path('invalid_rows.txt'), $errorsText);
+            file_put_contents(public_path('result.txt'), $errorsText);
             return response()->json(['message' => 'Файл успешно загружен и обработан'], 200);
         } catch (\Exception $e) {
             dd($e);
