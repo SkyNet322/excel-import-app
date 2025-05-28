@@ -21,14 +21,14 @@ class ExcelValidateService implements ExcelValidateServiceInterface
     {
         $this->errors = [];
 
-        // Пример проверки: все поля должны быть заполнены
         if (empty($row[0])) {
             $this->errors[] = 'Поле id обязательно.';
         }
+
         if (empty($row[1])) {
             $this->errors[] = 'Поле name обязательно.';
         }
-        // Можно добавить свои проверки
+
         if (!is_numeric($row[0])) {
             $this->errors[] = 'Поле id должно быть числом.';
         }
@@ -43,7 +43,6 @@ class ExcelValidateService implements ExcelValidateServiceInterface
             $this->errors[] = 'Дубликат ID: ' . $row[0];
         }
 
-        // Если всё хорошо
         return $this->errors;
     }
 }
