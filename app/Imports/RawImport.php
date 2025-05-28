@@ -4,11 +4,9 @@ namespace App\Imports;
 
 use App\Contracts\Excel\ExcelMapDataServiceInterface;
 use Maatwebsite\Excel\Concerns\ToArray;
-use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Events\BeforeSheet;
 use Maatwebsite\Excel\Concerns\WithStartRow;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Redis;
 
 class RawImport implements ToArray, WithStartRow, WithEvents

@@ -11,6 +11,10 @@ use \App\Service\ExcelSaveDataService;
 use \App\Service\ExcelMapDataService;
 use \App\Service\ExcelValidateService;
 use \App\Repository\ExcelSaveDataRepository;
+use App\Contracts\RowRepositoryInterface;
+use App\Contracts\RowServiceInterface;
+use App\Service\RowService;
+use App\Repository\RowRepository;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(ExcelMapDataServiceInterface::class, ExcelMapDataService::class);
         $this->app->singleton(ExcelValidateServiceInterface::class, ExcelValidateService::class);
         $this->app->singleton(ExcelSaveDataRepositoryInterface::class, ExcelSaveDataRepository::class);
+        $this->app->singleton(RowServiceInterface::class, RowService::class);
+        $this->app->singleton(RowRepositoryInterface::class, RowRepository::class);
     }
 
     /**

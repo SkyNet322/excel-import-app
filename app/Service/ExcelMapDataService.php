@@ -5,7 +5,6 @@ namespace App\Service;
 use App\Contracts\Excel\ExcelMapDataServiceInterface;
 use App\Contracts\Excel\ExcelValidateServiceInterface;
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
 
 class ExcelMapDataService implements ExcelMapDataServiceInterface
 {
@@ -16,6 +15,14 @@ class ExcelMapDataService implements ExcelMapDataServiceInterface
         $this->validator = $excelValidateServiceInterface;
     }
 
+    /**
+     * Маппинг и валидация данных из эксель.
+     *
+     * @param array $rows
+     * @param int $rowNumber
+     * @param int $processedIds
+     * @return array
+     */
     public function mapData(array $rows, int $rowNumber, &$processedIds): array
     {
         $result = [];

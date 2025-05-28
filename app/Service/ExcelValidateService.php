@@ -14,6 +14,7 @@ class ExcelValidateService implements ExcelValidateServiceInterface
      * Проверяет одну строку данных.
      *
      * @param array $row
+     * @param array $processedIds
      * @return array
      */
     public function validate(array $row, array &$processedIds): array

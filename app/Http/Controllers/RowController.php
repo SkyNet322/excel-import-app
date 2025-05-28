@@ -2,28 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\RowServiceInterface;
 use App\Http\Controllers\Controller;
-use App\Models\Rows;
-use Carbon\Carbon;
 
 class RowController extends Controller
 {
+    protected $rowService;
+
+    public function __construct(RowServiceInterface $rowServiceInterface)
+    {
+        $this->rowService = $rowServiceInterface;
+    }
+
     public function index()
     {
-        $records = Rows::orderBy('date', 'asc')->get();
-
-        $grouped = $records->groupBy(function ($item) {
-            return Carbon::create($item->date)->toDateString();
-        });
-
-        $result = [];
-
-        foreach ($grouped as $date => $items) {
-            $result[] = [
-                'date' => $date,
-                'items' => $items->values()->all(),
-            ];
-        }
+        $result = $this->rowService->get();
 
         return response()->json($result);
     }

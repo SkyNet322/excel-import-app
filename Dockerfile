@@ -30,6 +30,9 @@ WORKDIR /var/www/html
 # Копируем проект в контейнер
 COPY . .
 
+USER root
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
 # Устанавливаем зависимости
 RUN composer install --no-dev --optimize-autoloader
 
