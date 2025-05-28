@@ -3,6 +3,8 @@ version: '3.8'
 services:
   app:
     build: .
+    ports:
+    - "8967:8967"
     container_name: excel_app
     restart: unless-stopped
     working_dir: /var/www/html
@@ -37,6 +39,14 @@ services:
       - ./:/var/www/html
     depends_on:
       - app
+    networks:
+      - laravel_network
+    
+  redis:
+    container_name: redis
+    image: redis:alpine
+    ports:
+      - "6379:6379"
     networks:
       - laravel_network
 

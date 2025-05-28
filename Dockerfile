@@ -1,21 +1,28 @@
 FROM php:8.2-fpm
 
+COPY ./docker/php/php.ini /usr/local/etc/php/conf.d/custom.ini
+
 # Установка зависимостей
 RUN apt-get update && apt-get install -y \
     libpng-dev \
     libjpeg-dev \
     libfreetype6-dev \
+    libpq-dev \
+    libzip-dev \
     zip \
     unzip \
     git \
     curl \
-    libpq-dev
+    redis \
+    nodejs \
+    npm
 
 # Установка расширений PHP
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
-    docker-php-ext-install gd pdo pdo_pgsql pgsql
+    docker-php-ext-install zip gd pdo pdo_pgsql pgsql && \
+    pecl install redis && docker-php-ext-enable zip redis
 
-# Установка Composer
+# Установка Composerы
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www/html
